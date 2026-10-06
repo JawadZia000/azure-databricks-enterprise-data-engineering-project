@@ -53,3 +53,21 @@ checkpoints ← Auto Loader / Structured Streaming state
 ### Implementation Evidence
 <img width="2878" height="1376" alt="01_adls_gen2_lake_structure png" src="https://github.com/user-attachments/assets/aeda0e8d-2dd2-4404-8be4-178bcb5d0b88" />
 
+## 2. Secure Databricks-to-ADLS Access
+
+Created an **Azure Databricks Access Connector** with a **system-assigned managed identity** and granted it `Storage Blob Data Contributor` access to the ADLS Gen2 storage account.
+
+```text
+Azure Databricks
+      ↓
+Access Connector
+      ↓
+Managed Identity
+      ↓
+Azure RBAC
+      ↓
+ADLS Gen2
+```
+
+### Implementation Evidence
+<img width="1704" height="1152" alt="02_access_connector_rbac_assignment png" src="https://github.com/user-attachments/assets/10809abf-570c-4dcd-845e-85b28b3b332b" />
