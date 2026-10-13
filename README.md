@@ -71,3 +71,20 @@ ADLS Gen2
 
 ### Implementation Evidence
 <img width="1704" height="1152" alt="02_access_connector_rbac_assignment png" src="https://github.com/user-attachments/assets/10809abf-570c-4dcd-845e-85b28b3b332b" />
+
+## 3. Source Dataset Scale
+
+The pipeline uses **44.23 GB of compressed NYC Taxi & Limousine Commission (TLC) Parquet data** stored in the ADLS Gen2 source backlog.
+
+The dataset contains:
+
+- **96 Yellow Taxi files**
+- **96 FHV files**
+- **83 HVFHV files**
+- **275 source files total**
+
+The dataset size and file counts are calculated directly from ADLS at runtime rather than hard-coded.
+
+### Implementation Evidence
+<img width="2244" height="1276" alt="03_source_dataset_scale png" src="https://github.com/user-attachments/assets/ef6e1ac9-939c-4d1e-ba60-431c01477e3d" />
+
