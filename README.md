@@ -110,3 +110,30 @@ This run was launched manually to validate the complete task dependency and end-
 <img width="2784" height="1382" alt="04_incremental_pipeline_success png" src="https://github.com/user-attachments/assets/456b47f0-0e7e-492d-86aa-8d39f043e288" />
 
 **Full implementation:** [`01_bronze_autoloader_ingestion.ipynb`](notebooks/01_bronze_autoloader_ingestion.ipynb)
+
+### 5. Bronze Row Counts Before Incremental Run
+
+Before triggering the next incremental pipeline run, the current Bronze tables contained:
+
+- **Yellow Taxi:** 26,684,795 rows
+- **FHV:** 61,144,057 rows
+- **HVFHV:** not available yet
+
+HVFHV trip data begins from **February 2019** in the selected source dataset. Since the incremental release process has not yet reached that month, the `fhvhv_trips_raw` Bronze table has not been created yet.
+
+Once the pipeline reaches the first available HVFHV monthly file, the Auto Loader logic will ingest it into Bronze and automatically register:
+
+```text
+enterprise_de.bronze.fhvhv_trips_raw
+```
+
+![Bronze Row Counts Before Incremental Run]
+<img width="2694" height="1488" alt="05_bronze_row_counts_before png" src="https://github.com/user-attachments/assets/4876482e-80e2-4a06-ad85-5684d98102f2" />
+
+#### After Incremental Pipeline Run
+
+After running `nyc_tlc_incremental_pipeline` again, the Bronze row counts increased as the next monthly batch was appended by Auto Loader.
+
+![Bronze Row Counts After Incremental Run]
+<img width="2734" height="1518" alt="06_bronze_row_counts_after png" src="https://github.com/user-attachments/assets/b39606cf-2b02-4d82-8adb-fc6141eea9a6" />
+
