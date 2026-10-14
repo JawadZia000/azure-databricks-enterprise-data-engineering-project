@@ -88,3 +88,4 @@ The dataset size and file counts are calculated directly from ADLS at runtime ra
 ### Implementation Evidence
 <img width="2244" height="1276" alt="03_source_dataset_scale png" src="https://github.com/user-attachments/assets/ef6e1ac9-939c-4d1e-ba60-431c01477e3d" />
 
+**Full implementation:** [`00_release_incremental_batch.ipynb`](notebooks/00_release_incremental_batch.ipynb)
