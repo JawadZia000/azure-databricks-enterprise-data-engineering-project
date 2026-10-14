@@ -89,3 +89,23 @@ The dataset size and file counts are calculated directly from ADLS at runtime ra
 <img width="2244" height="1276" alt="03_source_dataset_scale png" src="https://github.com/user-attachments/assets/ef6e1ac9-939c-4d1e-ba60-431c01477e3d" />
 
 **Full implementation:** [`00_release_incremental_batch.ipynb`](notebooks/00_release_incremental_batch.ipynb)
+
+### 4. Incremental Bronze Pipeline Orchestration
+
+Created a Databricks **Jobs & Pipelines** workflow to orchestrate the incremental Bronze ingestion process.
+
+The job contains two dependent tasks:
+
+```text
+release_incremental_batch
+        ↓
+bronze_autoloader_ingestion
+```
+
+The first task releases the next monthly NYC TLC batch from the source backlog into the landing layer. After it succeeds, the second task uses Databricks Auto Loader to incrementally ingest newly arrived files into Bronze Delta tables.
+
+This run was launched manually to validate the complete task dependency and end-to-end ingestion flow before enabling automated scheduling.
+
+![Successful Bronze Pipeline Run] 
+<img width="2784" height="1382" alt="04_incremental_pipeline_success png" src="https://github.com/user-attachments/assets/456b47f0-0e7e-492d-86aa-8d39f043e288" />
+)
