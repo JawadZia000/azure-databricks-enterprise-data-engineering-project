@@ -108,4 +108,5 @@ This run was launched manually to validate the complete task dependency and end-
 
 ![Successful Bronze Pipeline Run] 
 <img width="2784" height="1382" alt="04_incremental_pipeline_success png" src="https://github.com/user-attachments/assets/456b47f0-0e7e-492d-86aa-8d39f043e288" />
-)
+
+**Full implementation:** [`01_bronze_autoloader_ingestion.ipynb`](notebooks/01_bronze_autoloader_ingestion.ipynb)
