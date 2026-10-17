@@ -137,3 +137,50 @@ After running `nyc_tlc_incremental_pipeline` again, the Bronze row counts increa
 ![Bronze Row Counts After Incremental Run]
 <img width="2734" height="1518" alt="06_bronze_row_counts_after png" src="https://github.com/user-attachments/assets/b39606cf-2b02-4d82-8adb-fc6141eea9a6" />
 
+## 6. Silver Layer — Taxi Zone Reference Data Ingestion
+
+To support location-based analytics and data quality validation, the official NYC TLC Taxi Zone Lookup dataset was ingested into Azure Data Lake Storage Gen2.
+
+The reference dataset maps numeric taxi location IDs to their corresponding boroughs, zone names, and service zones. Unlike the monthly trip datasets, this lookup is processed as static reference data.
+
+**Implementation workflow:**
+
+`Source CSV → PySpark Ingestion → Data Quality Validation → Delta Lake → Unity Catalog`
+
+### 6.1. Reference Data Quality Validation
+
+Validated all **265 taxi zone records** using PySpark, confirming:
+
+- 0 missing LocationIDs
+- 0 duplicate LocationIDs
+- 0 missing or empty zone names
+
+**Implementation Evidence 07 — Taxi Zone Data Quality Validation**
+
+<img width="2870" height="1388" alt="07_reference_csv_ingestion png" src="https://github.com/user-attachments/assets/146f803c-c82b-45be-95fc-11d380f8c50b" />
+
+
+### 6.2. Delta Lake Storage and Unity Catalog Registration
+
+Converted the validated CSV dataset into Delta format and stored it in the ADLS Gen2 Silver container at `silver/taxi_zones/`.
+
+Registered the Delta dataset as an external table in Unity Catalog:
+
+`enterprise_de.silver.taxi_zones`
+
+This provides governed access to the reference data while retaining its physical storage in ADLS Gen2.
+
+**Implementation Evidence 08 — Delta Lake Write and Table Registration**
+
+<img width="2702" height="1306" alt="08_reference_delta_registration png" src="https://github.com/user-attachments/assets/4b108029-62a3-42d6-87f2-8dce876cba39" />
+
+
+### 6.3. Registered Table Verification
+
+Executed a SQL query against the registered Unity Catalog table to verify successful registration and data accessibility.
+
+The lookup table will support future Silver transformations and Gold analytics by enriching `PULocationID` and `DOLocationID` with descriptive geographic information.
+
+**Implementation Evidence 09 — Unity Catalog SQL Verification**
+
+<img width="2712" height="1320" alt="09_reference_table_verification png" src="https://github.com/user-attachments/assets/3c8cc8fc-2692-4120-b7df-c1c069df9841" />
