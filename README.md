@@ -196,23 +196,29 @@ Analyzed Bronze Yellow Taxi records using PySpark to identify exact duplicates b
 
 ### 7.2. Data Quality and Quarantine
 
-Applied PySpark quality checks for invalid timestamps, negative trip durations, invalid distances, and unmapped locations. Separated valid and rejected records using `quarantine_reason`.
+Applied PySpark quality checks for invalid timestamps, negative trip durations, invalid distances, unmapped locations and negative amounts. Separated valid and rejected records using `quarantine_reason`.
 
-### Implementation Evidence 11 — Yellow Taxi Data Quality & Quarantine
-<img width="2638" height="1488" alt="11_yellow_taxi_quality_quarantine png" src="https://github.com/user-attachments/assets/4bf629c5-47e6-4e25-b91b-b1e52be033b6" />
+### Implementation Evidence 11 — Yellow Taxi Data Quality Logic
+<img width="2670" height="1568" alt="11_yellow_taxi_quarantine_logic png" src="https://github.com/user-attachments/assets/7b75e17b-01fe-4a02-b5c1-11c042e13b37" />
+
+
+### Yellow Taxi Data Quarantine
+
+<img width="2772" height="1220" alt="11a_yellow_taxi_quality_quarantine png" src="https://github.com/user-attachments/assets/92e2010f-8c90-4770-bbff-d6f769785a69" />
+
 
 ### 7.3. Incremental Silver Delta Write
 
 Processed Yellow Taxi micro-batches using `foreachBatch`, removed exact duplicates with `dropDuplicates()`, and wrote the records to Silver Delta with checkpointing.
 
-Verified **35,998,995 records** in the Silver layer.
+Verified **35,972,076 records** in the Silver layer.
 
 ### Implementation Evidence 12 — Incremental Silver Delta Write
 
 **Silver Streaming Write**
 
-<img width="2650" height="1236" alt="12a_yellow_taxi_silver_streaming_write png" src="https://github.com/user-attachments/assets/cb5c9123-2332-42de-8def-2510005a891f" />
+<img width="2650" height="1236" alt="12a_yellow_taxi_silver_streaming_write png" src="https://github.com/user-attachments/assets/ebfad4c3-c9f1-46d5-8f26-8cf86ff7de20" />
 
 **Silver Delta Verification**
+<img width="2642" height="1500" alt="12b_yellow_taxi_silver_delta_verification png" src="https://github.com/user-attachments/assets/3d6d1dac-8aad-42f7-a0f2-90f682d8ec4a" />
 
-<img width="2650" height="1436" alt="12b_yellow_taxi_silver_delta_verification png" src="https://github.com/user-attachments/assets/dad236f1-9fad-4919-b050-cbe4ac71cc60" />
