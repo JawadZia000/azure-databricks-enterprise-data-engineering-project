@@ -184,3 +184,35 @@ The lookup table will support future Silver transformations and Gold analytics b
 **Implementation Evidence 09 — Unity Catalog SQL Verification**
 
 <img width="2712" height="1320" alt="09_reference_table_verification png" src="https://github.com/user-attachments/assets/3c8cc8fc-2692-4120-b7df-c1c069df9841" />
+
+## 7. Silver Layer — Yellow Taxi Data Transformation
+
+### 7.1. Data Profiling and Duplicate Analysis
+
+Analyzed Bronze Yellow Taxi records using PySpark to identify exact duplicates before Silver transformations. Found **4 duplicate records** using `dropDuplicates()`.
+
+### Implementation Evidence 10 — Yellow Taxi Data Profiling & Duplicate Analysis
+<img width="2656" height="714" alt="10_yellow_taxi_data_profiling_duplicate_analysis png" src="https://github.com/user-attachments/assets/a822d600-a8a0-4444-8de2-c5c88858e71a" />
+
+### 7.2. Data Quality and Quarantine
+
+Applied PySpark quality checks for invalid timestamps, negative trip durations, invalid distances, and unmapped locations. Separated valid and rejected records using `quarantine_reason`.
+
+### Implementation Evidence 11 — Yellow Taxi Data Quality & Quarantine
+<img width="2638" height="1488" alt="11_yellow_taxi_quality_quarantine png" src="https://github.com/user-attachments/assets/4bf629c5-47e6-4e25-b91b-b1e52be033b6" />
+
+### 7.3. Incremental Silver Delta Write
+
+Processed Yellow Taxi micro-batches using `foreachBatch`, removed exact duplicates with `dropDuplicates()`, and wrote the records to Silver Delta with checkpointing.
+
+Verified **35,998,995 records** in the Silver layer.
+
+### Implementation Evidence 12 — Incremental Silver Delta Write
+
+**Silver Streaming Write**
+
+<img width="2650" height="1236" alt="12a_yellow_taxi_silver_streaming_write png" src="https://github.com/user-attachments/assets/cb5c9123-2332-42de-8def-2510005a891f" />
+
+**Silver Delta Verification**
+
+<img width="2650" height="1436" alt="12b_yellow_taxi_silver_delta_verification png" src="https://github.com/user-attachments/assets/dad236f1-9fad-4919-b050-cbe4ac71cc60" />
