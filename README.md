@@ -197,6 +197,7 @@ Analyzed Bronze Yellow Taxi records using PySpark to identify exact duplicates b
 ### 7.2. Data Quality and Quarantine
 
 Applied PySpark quality checks for invalid timestamps, negative trip durations, invalid distances, unmapped locations and negative amounts. Separated valid and rejected records using `quarantine_reason`.
+Initially loaded 18,931 quarantined records into Delta using overwrite mode. Future incremental batches will use append mode.
 
 ### Implementation Evidence 11 — Yellow Taxi Data Quality Logic
 <img width="2670" height="1568" alt="11_yellow_taxi_quarantine_logic png" src="https://github.com/user-attachments/assets/7b75e17b-01fe-4a02-b5c1-11c042e13b37" />
