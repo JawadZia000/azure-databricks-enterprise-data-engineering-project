@@ -1,7 +1,6 @@
 # Enterprise Azure Databricks Data Engineering Project
 
-Enterprise-grade Azure Databricks lakehouse project built to demonstrate end-to-end data engineering using ADLS Gen2, Auto Loader, Delta Lake, Medallion Architecture, CDC, SCD Type 2, Unity Catalog, Lakeflow Jobs, Databricks SQL, data quality, security, monitoring, and performance optimization.
-
+Enterprise Azure Databricks lakehouse project implementing an end-to-end NYC TLC data engineering pipeline using ADLS Gen2, Auto Loader, Delta Lake, Medallion Architecture, Unity Catalog, incremental processing, data quality validation, deduplication, quarantine, and checkpointing.
 ---
 
 ## 1. ADLS Gen2 Data Lake Foundation
